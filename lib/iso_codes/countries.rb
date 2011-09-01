@@ -12,7 +12,7 @@ module IsoCodes
   class Country < Entity
     attribute :alpha2, :alpha_2_code
     attribute :alpha3, :alpha_3_code
-    attribute :numeric_code
+    attribute :numeric, :numeric_code
     attribute :common_name
     attribute :name
     attribute :official_name
