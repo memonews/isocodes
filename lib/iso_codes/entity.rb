@@ -1,5 +1,7 @@
 module IsoCodes
   class EntityCollection
+    include Enumerable
+
     class <<self
       DEFAULT_PREFIXES = [
         "/usr",
@@ -54,6 +56,20 @@ module IsoCodes
         find_by_xml_attribute(xml_attr, value)
       end
     end
+
+    def each(&block)
+      enum = Enumerator.new do |yielder|
+        @xml_doc.css(@xml_element_name).each do |node|
+          yielder << @entity_class.new(node)
+        end
+      end
+
+      if block_given?
+        enum.each(&block)
+      else
+        enum
+      end
+    end
   end
 
   class Entity
@@ -75,6 +91,10 @@ module IsoCodes
     def initialize(node)
       @node = node
       @attribute_cache = {}
+    end
+
+    def <=>(other)
+      self.to_s <=> other.to_s
     end
   end
 end
