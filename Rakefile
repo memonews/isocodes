@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "isocodes"
   gem.homepage = "http://github.com/memonews/isocodes"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Parses XML-Files from the iso-codes package}
+  gem.description = %Q{Parses XML-Files from the iso-codes package}
   gem.email = "jou@orly.ch"
   gem.authors = ["MeMo News AG"]
   # dependencies defined in Gemfile
