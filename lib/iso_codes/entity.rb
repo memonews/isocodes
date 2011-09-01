@@ -1,5 +1,26 @@
 module IsoCodes
   class EntityCollection
+    class <<self
+      DEFAULT_PREFIXES = [
+        "/usr",
+        "/usr/local"
+      ]
+
+      def isocodes_prefix
+        @prefix ||= DEFAULT_PREFIXES.detect do |prefix|
+          File.exists?("#{prefix}/share/xml/iso-codes/iso_3166.xml")
+        end
+      end
+
+      def isocodes_prefix=(prefix)
+        @prefix = prefix
+      end
+
+      def xml_path
+        "#{isocodes_prefix}/share/xml/iso-codes"
+      end
+    end
+
     attr_reader :xml_doc
 
     def initialize(file, entity_class, xml_element_name)

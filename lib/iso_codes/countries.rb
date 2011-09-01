@@ -1,16 +1,8 @@
 module IsoCodes
   class Countries < EntityCollection
-    DEFAULT_XML_PATHS = [
-      "/usr/share/xml/iso-codes/iso_3166.xml",
-      "/usr/local/share/xml/iso-codes/iso_3166.xml"
-    ]
-
     def initialize(xml = nil)
       unless xml
-        xml_file = DEFAULT_XML_PATHS.detect do |path|
-          File.exists?(path)
-        end
-        xml = File.open(xml_file)
+        xml = "#{self.class.xml_path}/iso_3166.xml"
       end
 
       super(xml, Country, 'iso_3166_entry')
