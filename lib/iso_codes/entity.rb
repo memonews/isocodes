@@ -9,7 +9,8 @@ module IsoCodes
       @xml_element_name = xml_element_name
     end
 
-    def method_missing(method, value)
+    def method_missing(method, *args)
+      value = args[0]
       if method.to_s =~ /^find_by_(.+)$/
         find_by_attribute($1, value)
       else
