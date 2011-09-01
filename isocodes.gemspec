@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{isocodes}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["MeMo News AG"]
-  s.date = %q{2011-07-28}
+  s.date = %q{2011-09-01}
   s.description = %q{TODO: longer description of your gem}
   s.email = %q{jou@orly.ch}
   s.extra_rdoc_files = [
@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/iso_codes.rb",
     "lib/iso_codes/countries.rb",
     "lib/iso_codes/entity.rb",
+    "lib/iso_codes/languages.rb",
     "spec/iso_codes/entity_collection_spec.rb",
     "spec/iso_codes/entity_spec.rb",
     "spec/spec_helper.rb"
@@ -48,12 +49,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<fakefs>, [">= 0"])
     else
       s.add_dependency(%q<nokogiri>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<fakefs>, [">= 0"])
     end
   else
     s.add_dependency(%q<nokogiri>, [">= 0"])
@@ -61,6 +64,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
     s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<fakefs>, [">= 0"])
   end
 end
 
