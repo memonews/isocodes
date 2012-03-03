@@ -26,15 +26,27 @@ describe IsoCodes::EntityCollection do
     @xml_io = StringIO.new(@xml)
   end
 
-  describe "finding by attribute" do
-    let(:entity_class) do
-      Class.new(IsoCodes::Entity) do
-        attribute :alpha2, :alpha_2_code
-      end
+  let(:entity_class) do
+    Class.new(IsoCodes::Entity) do
+      attribute :alpha2, :alpha_2_code
     end
+  end
 
-    let(:collection) { IsoCodes::EntityCollection.new(@xml_io, entity_class, 'iso_3166_entry') }
+  let(:collection) { IsoCodes::EntityCollection.new(@xml_io, entity_class, 'iso_3166_entry') }
 
+  describe "#all" do
+    it "should have correct amount of entries" do
+      collection.all.size.should == 2
+    end
+  end
+
+  describe "#each" do
+    it "should enumerate #all" do
+      collection.each.to_a.should == collection.all
+    end
+  end
+
+  describe "finding by attribute" do
     it "should be able to find entries by xml attribute" do
       entity = collection.find_by_xml_attribute(:alpha_2_code, "AF")
       

@@ -57,17 +57,15 @@ module IsoCodes
       end
     end
 
-    def each(&block)
-      enum = Enumerator.new do |yielder|
-        @xml_doc.css(@xml_element_name).each do |node|
-          yielder << @entity_class.new(node)
-        end
-      end
+    def all
+      @all ||= @xml_doc.css(@xml_element_name).map { |node| @entity_class.new(node) }
+    end
 
+    def each(&block)
       if block_given?
-        enum.each(&block)
+        all.each(&block)
       else
-        enum
+        all.each
       end
     end
   end
