@@ -27,12 +27,15 @@ describe IsoCodes::EntityCollection do
   end
 
   describe "finding by attribute" do
-    it "should be able to find entries by xml attribute" do
-      entity_class = Class.new(IsoCodes::Entity) do
+    let(:entity_class) do
+      Class.new(IsoCodes::Entity) do
         attribute :alpha2, :alpha_2_code
       end
+    end
 
-      collection = IsoCodes::EntityCollection.new(@xml_io, entity_class, 'iso_3166_entry')
+    let(:collection) { IsoCodes::EntityCollection.new(@xml_io, entity_class, 'iso_3166_entry') }
+
+    it "should be able to find entries by xml attribute" do
       entity = collection.find_by_xml_attribute(:alpha_2_code, "AF")
       
       entity.should be_a(entity_class)
@@ -40,11 +43,6 @@ describe IsoCodes::EntityCollection do
     end
 
     it "should be able to find entries by object attribute" do
-      entity_class = Class.new(IsoCodes::Entity) do
-        attribute :alpha2, :alpha_2_code
-      end
-
-      collection = IsoCodes::EntityCollection.new(@xml_io, entity_class, 'iso_3166_entry')
       entity = collection.find_by_attribute(:alpha2, "AF")
       
       entity.should be_a(entity_class)
@@ -52,11 +50,6 @@ describe IsoCodes::EntityCollection do
     end
 
     it "should be able to find entries with find_by_\#{attr}" do
-      entity_class = Class.new(IsoCodes::Entity) do
-        attribute :alpha2, :alpha_2_code
-      end
-
-      collection = IsoCodes::EntityCollection.new(@xml_io, entity_class, 'iso_3166_entry')
       entity = collection.find_by_alpha2("AF")
 
       entity.should be_a(entity_class)

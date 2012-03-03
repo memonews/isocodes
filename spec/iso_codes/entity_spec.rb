@@ -27,55 +27,39 @@ describe IsoCodes::Entity do
     @bolivia = @document.css('iso_3166_entry[alpha_2_code="BO"]')[0]
   end
 
-  describe ".attribute" do
-    it "should fetch the defined XML attribute" do
-      entity = Class.new(IsoCodes::Entity) do
-        attribute :alpha2, "alpha_2_code"
-      end
+  let(:entity) do
+    Class.new(IsoCodes::Entity) do
+      attribute :alpha2, "alpha_2_code"
+      attribute :common_name, "common_name"
+      attribute :name
+    end
+  end
 
+  describe "attributes" do
+    it "should fetch the defined XML attribute" do
       entity.new(@bolivia).alpha2.should == "BO"
     end
 
     it "should accept symbols as XML attribute" do
-      entity = Class.new(IsoCodes::Entity) do
-        attribute :alpha2, :alpha_2_code
-      end
-
       instance = entity.new(@bolivia)
       instance.alpha2.should == "BO"
     end
 
     it "should return nil on undefined XML attribute" do
-      entity = Class.new(IsoCodes::Entity) do
-        attribute :common_name, :common_name
-      end
-
       entity.new(@afghanistan).common_name.should be_nil
       entity.new(@bolivia).common_name.should == "Bolivia"
     end
 
     it "should default XML attribute name to object attribute name" do
-      entity = Class.new(IsoCodes::Entity) do
-        attribute :name
-      end
-
       entity.new(@afghanistan).name.should == "Afghanistan"
     end
 
     it "should add defined attributes to .attributes" do
-      entity = Class.new(IsoCodes::Entity) do
-        attribute :name
-      end
-
       entity.attributes.should have_key(:name)
       entity.attributes[:name].should == "name"
     end
 
     it "should ask the Nokogiri node only once" do
-      entity = Class.new(IsoCodes::Entity) do
-        attribute :alpha2, :alpha_2_code
-      end
-
       mock_node = mock("mock-node")
       mock_node.should_receive(:"[]").once.and_return("foo")
 
