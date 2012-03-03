@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{isocodes}
-  s.version = "0.2.1"
+  s.name = "isocodes"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["MeMo News AG"]
-  s.date = %q{2011-09-01}
-  s.description = %q{Parses XML-Files from the iso-codes package}
-  s.email = %q{jou@orly.ch}
+  s.date = "2012-03-03"
+  s.description = "Parses XML-Files from the iso-codes package"
+  s.email = "jou@orly.ch"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -34,36 +34,36 @@ Gem::Specification.new do |s|
     "spec/iso_codes/entity_spec.rb",
     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/memonews/isocodes}
+  s.homepage = "http://github.com/memonews/isocodes"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Parses XML-Files from the iso-codes package}
+  s.rubygems_version = "1.8.11"
+  s.summary = "Parses XML-Files from the iso-codes package"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<nokogiri>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<simplecov>, [">= 0"])
       s.add_development_dependency(%q<fakefs>, [">= 0"])
     else
       s.add_dependency(%q<nokogiri>, [">= 0"])
-      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<simplecov>, [">= 0"])
       s.add_dependency(%q<fakefs>, [">= 0"])
     end
   else
     s.add_dependency(%q<nokogiri>, [">= 0"])
-    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<simplecov>, [">= 0"])
     s.add_dependency(%q<fakefs>, [">= 0"])
   end
 end
