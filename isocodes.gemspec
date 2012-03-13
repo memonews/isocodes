@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "isocodes"
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["MeMo News AG"]
-  s.date = "2012-03-03"
+  s.date = "2012-03-13"
   s.description = "Parses XML-Files from the iso-codes package"
   s.email = "jou@orly.ch"
   s.extra_rdoc_files = [
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
     "lib/iso_codes/countries.rb",
     "lib/iso_codes/entity.rb",
     "lib/iso_codes/languages.rb",
+    "lib/isocodes.rb",
     "spec/iso_codes/entity_collection_spec.rb",
     "spec/iso_codes/entity_spec.rb",
     "spec/spec_helper.rb"
