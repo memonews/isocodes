@@ -21,6 +21,10 @@ module IsoCodes
       def xml_path
         "#{isocodes_prefix}/share/xml/iso-codes"
       end
+
+      def instance
+        @instance ||= self.new
+      end
     end
 
     attr_reader :xml_doc
@@ -30,6 +34,7 @@ module IsoCodes
       @xml_doc = Nokogiri::XML.parse(input)
       @entity_class = entity_class
       @xml_element_name = xml_element_name
+      @find_cache = {}
     end
 
     def method_missing(method, *args)
@@ -42,11 +47,15 @@ module IsoCodes
     end
 
     def find_by_xml_attribute(xml_attribute, value)
-      selector = "#{@xml_element_name}[#{xml_attribute}=\"#{value}\"]"
-      node = @xml_doc.css(selector)[0]
+      @find_cache[xml_attribute] ||= {}
+      @find_cache[xml_attribute][value] ||= begin
+        puts "find_by_xml_attribute(#{xml_attribute}, #{value})"
+        selector = "#{@xml_element_name}[#{xml_attribute}=\"#{value}\"]"
+        node = @xml_doc.css(selector)[0]
 
-      if node
-        @entity_class.new(node)
+        if node
+          @entity_class.new(node)
+        end
       end
     end
 
