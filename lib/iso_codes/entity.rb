@@ -49,7 +49,6 @@ module IsoCodes
     def find_by_xml_attribute(xml_attribute, value)
       @find_cache[xml_attribute] ||= {}
       @find_cache[xml_attribute][value] ||= begin
-        puts "find_by_xml_attribute(#{xml_attribute}, #{value})"
         selector = "#{@xml_element_name}[#{xml_attribute}=\"#{value}\"]"
         node = @xml_doc.css(selector)[0]
 
