@@ -103,5 +103,13 @@ module IsoCodes
     def <=>(other)
       self.to_s <=> other.to_s
     end
+
+    def to_hash
+      kv_pairs = self.class.attributes.map do |object_attribute, xml_attribute|
+        [object_attribute, self.send(object_attribute.to_sym)]
+      end
+
+      Hash[kv_pairs]
+    end
   end
 end
