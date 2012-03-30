@@ -69,15 +69,35 @@ module IsoCodes
         @attributes ||= {}
       end
 
-      def attribute(object_attribute, xml_attribute = nil)
+      def attribute(object_attribute, xml_attribute_or_options = nil, options = nil)
+        xml_attribute = nil
+
+        if xml_attribute_or_options.is_a?(Hash)
+          options = xml_attribute_or_options
+        else
+          xml_attribute = xml_attribute_or_options
+        end
+
+        options = {
+          :localizable => false,
+        }.merge(options || {})
+
         xml_attribute ||= object_attribute
         self.attributes[object_attribute] = xml_attribute.to_s
 
         define_method(object_attribute) do
           @attribute_cache[object_attribute] ||= @node[xml_attribute.to_s]
         end
+
+        if options[:localizable]
+          define_method("localized_#{object_attribute}") do
+            gettext(self.send(object_attribute))
+          end
+        end
       end
     end
+
+    include ::GetText
 
     def initialize(node)
       @node = node

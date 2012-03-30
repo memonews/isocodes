@@ -16,7 +16,9 @@ module IsoCodes
   class Language < Entity
     attribute :alpha2, :iso_639_1_code
     attribute :alpha3, :iso_639_2B_code
-    attribute :name
+    attribute :name, :localizable => true
+
+    bindtextdomain "iso_639", :path => "#{IsoCodes.isocodes_prefix}/share/locale"
 
     def to_s
       name

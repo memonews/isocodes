@@ -1,5 +1,6 @@
 require 'stringio'
 require 'nokogiri'
+require 'gettext'
 
 module IsoCodes
   DEFAULT_PREFIXES = [
@@ -15,6 +16,14 @@ module IsoCodes
 
   def isocodes_prefix=(prefix)
     @prefix = prefix
+  end
+
+  def locale
+    ::GetText.locale
+  end
+
+  def locale=(value)
+    ::GetText.locale = value
   end
 
   extend self

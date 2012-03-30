@@ -31,7 +31,9 @@ describe IsoCodes::Entity do
     Class.new(IsoCodes::Entity) do
       attribute :alpha2, "alpha_2_code"
       attribute :common_name, "common_name"
-      attribute :name
+      attribute :name, :localizable => true
+
+      bindtextdomain "iso_3166", :path => "#{IsoCodes.isocodes_prefix}/share/locale"
     end
   end
 
@@ -67,6 +69,25 @@ describe IsoCodes::Entity do
 
       3.times do
         instance.alpha2
+      end
+    end
+
+    describe "localization" do
+      before(:each) do
+        ::GetText.locale = 'de'
+      end
+      subject { entity.new(@bolivia) }
+
+      it "should add localized accessor for localizable attributes" do
+        subject.should respond_to(:localized_name)
+      end
+
+      it "should not add localized accessor for non-localizable attribute" do
+        subject.should_not respond_to(:localized_alpha2)
+      end
+
+      it "should return localized entry" do
+        subject.localized_name.should == "Bolivien, Plurinationaler Staat"
       end
     end
   end
